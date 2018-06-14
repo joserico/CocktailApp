@@ -1,0 +1,16 @@
+page-cocktail {
+
+}
+
+//Table
+.table{
+  margin-bottom: 2rem;
+  background-color: color($colors, white);
+}
+.header .col {
+  background-color: color($colors, danger);
+}
+
+.col {
+  border-bottom: solid 1px color($colors, primary);
+}

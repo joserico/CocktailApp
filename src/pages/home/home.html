@@ -1,18 +1,39 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar color="black">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title text-center><img alt="logo" height="60"   src="assets/imgs/logo-white.svg" ></ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content padding class="content">
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <ion-searchbar [(ngModel)]="q" (ionInput)="getCocktails()"></ion-searchbar>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <div *ngIf="cocktails">
+        <h1 class="title" *ngIf="!q" text-center>Cocktails populares</h1>
+        <h1 class="title" *ngIf="q" text-center>Buscar por "{{q}}"</h1>
+    </div>
+    <div *ngIf="!cocktails">
+        <p>No hemos encontrado ningún cocktail por la búsqueda "{{q}}"</p>
+    </div>
+
+    <ion-list>
+        <button ion-item *ngFor="let cocktail of cocktails" (click)="itemTapped($event, cocktail)">
+            <ion-avatar item-start>
+                <img [src]="cocktail.strDrinkThumb">
+            </ion-avatar>
+            <h2>{{ cocktail.strDrink | uppercase }}</h2>
+            <p>Categoría: <b>{{ cocktail.strCategory }}</b> | En vaso: <b>{{ cocktail.strGlass }}</b> | Tipo: <b>{{ cocktail.strAlcoholic }}</b></p>
+        </button>
+    </ion-list>
+
+    <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar color="black">
+        <ion-title>Jose Rico - PAC3 - Tecnologies i eines pel desenvolupament web</ion-title>
+    </ion-toolbar>
+</ion-footer>
